@@ -1,1 +1,9 @@
 - In eventloop/poll.js, what will be the order of execution? Briefly explain the order of execution w.r.t the event loop phases.
+
+The async operation function with readFile will run in the poll phase, but it won't log anything 
+to the console until the event loop gets to pending callbacks. The other things will run as soon 
+as we get to them (in the poll phase), so the order will be:
+
+foo
+log 'done' to console
+the read file thing

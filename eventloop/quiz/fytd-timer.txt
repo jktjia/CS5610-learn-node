@@ -1,1 +1,14 @@
 - In eventloop/timer.js, what will be the order of execution? Briefly explain the order of execution w.r.t the event loop phases.
+
+foo
+baz
+foo
+baz
+2 : bar
+1 : bar
+
+When foo is called it logs 'foo' to the console, sets a timeout to log 
+'{some input} : bar', and then logs 'baz' to the console. The timeouts
+don't happen until the event loop gets to them, so the console logs 'foo' 
+'bar' for each call of loop (in the poll phase) and then the console logs 
+in the things that were timed out in the timer phase.

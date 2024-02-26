@@ -1,2 +1,8 @@
 - Explain the order of execution in terms of the event loop for eventloop/immediate.js.
 - Will the order of execution change if timeout is changed to 0? Why or why not?
+
+Tthe console logs happen in the callback for readFile, so logging the data happens first,
+followed by setting a timer for 10 ms, and then logging the immediate thing. Then the timer
+runs out and logs the thing in the timeout during the timer phase. Changing the amount of
+time for the timeout wouldn't change that order because everything else happens in the same
+pending callback phase where the timer is queued.
